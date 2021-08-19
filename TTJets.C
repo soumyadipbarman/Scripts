@@ -34,16 +34,18 @@ using namespace std;
 
 void TTJets(){
 
-	TFile *f = new TFile("ttbar_QCD_NLO_MG273_v1.root");
+	TFile *f = new TFile("input.root");
 
 	TTree *tree = (TTree*)f->Get("Events");
-
-	UInt_t nGenPart; //4274
-	Float_t GenPart_pt[4274];
-	Float_t GenPart_phi[4274];
-	Int_t GenPart_pdgId[4274];
-	Int_t GenPart_status[4274];
 	
+	Float_t genWeight;
+	UInt_t nGenPart; //4274
+	Float_t GenPart_pt[4615];
+	Float_t GenPart_phi[4615];
+	Int_t GenPart_pdgId[4615];
+	Int_t GenPart_status[4615];
+	
+	tree->SetBranchAddress("genWeight", &genWeight);
 	tree->SetBranchAddress("nGenPart", &nGenPart);
 	tree->SetBranchAddress("GenPart_pdgId", &GenPart_pdgId);
 	tree->SetBranchAddress("GenPart_status", &GenPart_status);
@@ -54,14 +56,18 @@ void TTJets(){
 	TH1F* PT_mg273 = new TH1F ("PT_mg273", "top quark PT", 20, 0, 400);
 
 	Long64_t nentries = tree->GetEntries();       
-		      
+	
+	Int_t nevt = 0;	      
 	for (Long64_t jentry=0; jentry<nentries;jentry++) { // event loop starts
 		tree->GetEntry(jentry);
+		nevt++;
+
+        cout << "No. of events processed : "<<nevt<<endl;
 
 // for all top and anti-top
 		for(int igenpart=0; igenpart<nGenPart; igenpart++) { //gen loop
  			if( std::abs(GenPart_pdgId[igenpart]) == 6  && GenPart_status[igenpart] > 60 ) {   // check top and antitop quaark
-				PT_mg273->Fill(GenPart_pt[igenpart]);
+				PT_mg273->Fill(GenPart_pt[igenpart],genWeight);
                 		}
         		}	
 //for pair
@@ -75,7 +81,7 @@ void TTJets(){
                                                 			Float_t px2 = GenPart_pt[igenpart2]*cos(GenPart_phi[igenpart2]);
                                                 			Float_t py2 = GenPart_pt[igenpart2]*sin(GenPart_phi[igenpart2]);
                                                 			Float_t pt = sqrt(px1*px2 + py1*py2);
-                                                			pairPT_mg273->Fill(pt);
+                                                			pairPT_mg273->Fill(pt,genWeight);
                                                 			}	
                                 				}
                         				}		
@@ -84,7 +90,7 @@ void TTJets(){
 
 }//event loop
 
-   TFile* of = TFile::Open("TTJets_output.root", "RECREATE");
+   TFile* of = TFile::Open("output.root", "RECREATE");
    pairPT_mg273->Write();
    PT_mg273->Write();
    of->Close();
