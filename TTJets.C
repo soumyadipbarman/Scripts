@@ -52,8 +52,8 @@ void TTJets(){
 	tree->SetBranchAddress("GenPart_pt", &GenPart_pt);
 	tree->SetBranchAddress("GenPart_phi", &GenPart_phi);
 
-	TH1F* pairPT_mg273 = new TH1F ("pairPT_mg273", "top quark pair PT", 20, 0, 200);
-	TH1F* PT_mg273 = new TH1F ("PT_mg273", "top quark PT", 20, 0, 400);
+	TH1F* pairPT = new TH1F ("pairPT", "top quark pair PT", 20, 0, 200);
+	TH1F* PT = new TH1F ("PT", "top quark PT", 20, 0, 400);
 
 	Long64_t nentries = tree->GetEntries();       
 	
@@ -67,7 +67,7 @@ void TTJets(){
 // for all top and anti-top
 		for(int igenpart=0; igenpart<nGenPart; igenpart++) { //gen loop
  			if( std::abs(GenPart_pdgId[igenpart]) == 6  && GenPart_status[igenpart] > 60 ) {   // check top and antitop quaark
-				PT_mg273->Fill(GenPart_pt[igenpart],genWeight);
+				PT->Fill(GenPart_pt[igenpart],genWeight);
                 		}
         		}	
 //for pair
@@ -81,7 +81,7 @@ void TTJets(){
                                                 			Float_t px2 = GenPart_pt[igenpart2]*cos(GenPart_phi[igenpart2]);
                                                 			Float_t py2 = GenPart_pt[igenpart2]*sin(GenPart_phi[igenpart2]);
                                                 			Float_t pt = sqrt(px1*px2 + py1*py2);
-                                                			pairPT_mg273->Fill(pt,genWeight);
+                                                			pairPT->Fill(pt,genWeight);
                                                 			}	
                                 				}
                         				}		
@@ -91,8 +91,8 @@ void TTJets(){
 }//event loop
 
    TFile* of = TFile::Open("output.root", "RECREATE");
-   pairPT_mg273->Write();
-   PT_mg273->Write();
+   pairPT->Write();
+   PT->Write();
    of->Close();
 
 }
