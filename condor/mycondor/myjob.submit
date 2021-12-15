@@ -1,8 +1,0 @@
-Universe        = grid
-grid_resource   = condor
-Executable      = mysubmit.sh
-Output          = job_test.output
-Error           = job_test.error
-Log             = job_test.log
-queue
-

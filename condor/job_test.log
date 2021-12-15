@@ -1,9 +1,0 @@
-000 (005.000.000) 04/15 16:47:32 Job submitted from host: <144.16.111.23:9276>
-...
-012 (005.000.000) 04/15 16:47:35 Job was held.
-	the gridmanager can't handle this job type
-	Code 0 Subcode 0
-...
-009 (005.000.000) 08/04 09:56:25 Job was aborted by the user.
-	via condor_rm (by user brij)
-...
