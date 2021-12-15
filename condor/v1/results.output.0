@@ -1,0 +1,6 @@
+I'm process id 13012 on wn060.indiacms.res.in
+Thu Sep 18 15:59:38 IST 2014
+Running as binary /var/lib/condor/execute/dir_13002/condor_exec.exe Example.280.0 100
+My name (argument 1) is Example.280.0
+My sleep duration (argument 2) is 100
+Sleep of 100 seconds finished.  Exiting

@@ -1,0 +1,46 @@
+000 (4218623.000.000) 05/29 13:28:07 Job submitted from host: <144.16.111.6:9228>
+...
+001 (4218623.000.000) 05/29 13:28:16 Job executing on host: <192.168.2.88:9893?addrs=192.168.2.88-9893>
+...
+006 (4218623.000.000) 05/29 13:28:16 Image size of job updated: 97208
+	0  -  MemoryUsage of job (MB)
+	0  -  ResidentSetSize of job (KB)
+...
+005 (4218623.000.000) 05/29 13:28:17 Job terminated.
+	(1) Normal termination (return value 1)
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Run Remote Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Run Local Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Total Remote Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Total Local Usage
+	136  -  Run Bytes Sent By Job
+	36  -  Run Bytes Received By Job
+	136  -  Total Bytes Sent By Job
+	36  -  Total Bytes Received By Job
+	Partitionable Resources :    Usage  Request Allocated
+	   Cpus                 :                 1         1
+	   Disk (KB)            :        9        1   5753940
+	   Memory (MB)          :        0        1      2302
+...
+000 (4218624.000.000) 05/29 13:39:57 Job submitted from host: <144.16.111.6:9228>
+...
+001 (4218624.000.000) 05/29 13:40:16 Job executing on host: <192.168.2.88:9893?addrs=192.168.2.88-9893>
+...
+006 (4218624.000.000) 05/29 13:40:16 Image size of job updated: 1
+	0  -  MemoryUsage of job (MB)
+	0  -  ResidentSetSize of job (KB)
+...
+005 (4218624.000.000) 05/29 13:40:17 Job terminated.
+	(1) Normal termination (return value 1)
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Run Remote Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Run Local Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Total Remote Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Total Local Usage
+	136  -  Run Bytes Sent By Job
+	36  -  Run Bytes Received By Job
+	136  -  Total Bytes Sent By Job
+	36  -  Total Bytes Received By Job
+	Partitionable Resources :    Usage  Request Allocated
+	   Cpus                 :                 1         1
+	   Disk (KB)            :        9        1   5755910
+	   Memory (MB)          :        0        1      2302
+...

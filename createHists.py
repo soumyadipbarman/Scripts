@@ -1,3 +1,4 @@
+#USAGE : python createHists.py --in input.root --out output.root 
 import os
 import sys
 import optparse
@@ -30,16 +31,22 @@ def main():
   h_Zpt_LHE = TH1F('Zpt_LHE', 'Zpt_LHE', 100, 0, 500)
   h_Zmass_LHE = TH1F('Zmass_LHE', 'Zmass_LHE', 75, 0, 1500)
   #GEN histos
-  h_Zpt_GEN = TH1F('Zpt_GEN', 'Zpt_GEN', 100, 0, 500)
-  h_Zmass_GEN = TH1F('Zmass_GEN', 'Zmass_GEN', 75, 0, 1500)
- 
+  h_Zpt_GEN = TH1F('Zpt_GEN', 'Zpt_GEN', 30, 0, 300)
+  h_Zmass_GEN = TH1F('Zmass_GEN', 'Zmass_GEN', 40, 0, 200)
+  h_Zeta_GEN = TH1F('Zeta_GEN', 'Zeta_GEN', 30, -5, 5)
+  h_Zphi_GEN = TH1F('Zphi_GEN', 'Zphi_GEN', 30, -3, 3)
+  h_njet_GEN = TH1F('njet_GEN', 'njet_GEN', 10, 0, 10) 
+
   #add histos
   histo_array['h_weight']=h_weight
   histo_array['h_Zpt_LHE']=h_Zpt_LHE
   histo_array['h_Zmass_LHE']=h_Zmass_LHE
   histo_array['h_Zpt_GEN']=h_Zpt_GEN
   histo_array['h_Zmass_GEN']=h_Zmass_GEN
-  
+  histo_array['h_Zeta_GEN']=h_Zeta_GEN
+  histo_array['h_Zphi_GEN']=h_Zphi_GEN
+  histo_array['h_njet_GEN']=h_njet_GEN
+
   for key in histo_array:
     histo_array[key].SetStats(0)
     histo_array[key].Sumw2()
@@ -67,6 +74,7 @@ def main():
 
     treein.GetEntry(entry)
     weight=(treein.genWeight)/(abs(treein.genWeight))
+    njets=treein.nGenJet
 
     #LHE info
     for iLHE in range(2,treein.nLHEPart):
@@ -89,6 +97,11 @@ def main():
       GENzp4=GENDressLep[0].p4_vector+GENDressLep[1].p4_vector
       histo_array['h_Zpt_GEN'].Fill(GENzp4.Pt(), weight)
       histo_array['h_Zmass_GEN'].Fill(GENzp4.M(), weight)
+      histo_array['h_Zeta_GEN'].Fill(GENzp4.Eta(), weight)
+      histo_array['h_Zphi_GEN'].Fill(GENzp4.Phi(), weight)
+
+    #for ijet in range(0, treein.nGenJet):
+    histo_array['h_njet_GEN'].Fill(njets, weight)
 
   fileout=TFile.Open(opt.outputfiles,'RECREATE')
   fileout.cd()
@@ -99,4 +112,3 @@ def main():
 
 if __name__ == "__main__":
   sys.exit(main())
-
