@@ -46,28 +46,34 @@ int main()
 void ZJets(){
 
 	//TFile *f = new TFile("/home/sobarman/t3store3/Generator/UNLOPS/date_23052021/dyee012j_5f_NLO_UNLOPS_23052021.root");
-	//TFile *f = new TFile("/home/sobarman/t3store3/Generator/UNLOPS/date_26052021/dyee012j_5f_NLO_UNLOPS_26052021.root");
-	
+	//TFile *f = new TFile("/home/sobarman/t3store3/Generator/UNLOPS/date_26052021/dyee012j_5f_NLO_UNLOPS_26052021.root");	
 	//TFile *f = new TFile("/home/sobarman/t3store3/Generator/UNLOPS/date_23052021/dyee012j_5f_NLO_FXFX_23052021.root");
-	TFile *f = new TFile("/home/sobarman/t3store3/Generator/UNLOPS/date_26052021/dyee012j_5f_NLO_FXFX_26052021.root");
+	//TFile *f = new TFile("/home/sobarman/t3store3/Generator/UNLOPS/Analysis/date_18112021/dyeej_2NLO3LO_5f_NLO_UNLOPS_24112021.root");
+	//TFile *f = new TFile("/home/sobarman/t3store3/Generator/UNLOPS/Analysis/date_26102021/dyee012j_5f_NLO_FXFX_24112021.root");
+        //TFile *f = new TFile("/home/sobarman/t3store3/cmssw/CMSSW_10_6_20/src/dyeej_2NLO3LO_5f_NLO_UNLOPS_19032022.root");
+        TFile *f = new TFile("/home/sobarman/t3store3/Generator/UNLOPS/Analysis/date_30042022/py8306/condor/dyeej_2NLO3LO_5f_NLO_UNLOPS_py8306_30042022.root");
+      
 
 	TTree *tree = (TTree*)f->Get("Events");
 	
 	//Int_t num = 1000000;
 	Float_t genWeight;
+        Float_t Generator_weight;
 
-	UInt_t nGenPart; //4292
-	Float_t GenPart_pt[4292];
-	Float_t GenPart_phi[4292];
-	Float_t GenPart_eta[4292];
-	Float_t GenPart_mass[4292];
-	Int_t GenPart_pdgId[4292];
-	Int_t GenPart_status[4292];
-	
-	UInt_t nGenJet;  // 22
-	Float_t GenJet_pt[22];
-	Float_t GenJet_eta[22];
-	Float_t GenJet_phi[22];
+	UInt_t nGenPart; //4191
+	Float_t GenPart_pt[4191];
+	Float_t GenPart_phi[4191];
+	Float_t GenPart_eta[4191];
+	Float_t GenPart_mass[4191];
+	Int_t GenPart_pdgId[4191];
+	Int_t GenPart_status[4191];
+	//Float_t test;
+	//Int_t test;
+
+	UInt_t nGenJet;  // 19
+	Float_t GenJet_pt[19];
+	Float_t GenJet_eta[19];
+	Float_t GenJet_phi[19];
 	
 	UInt_t nGenDressedLepton; // 4
 	Float_t GenDressedLepton_pt[4];
@@ -79,6 +85,7 @@ void ZJets(){
 	Float_t GenMET_pt;
 	Float_t GenMET_phi;
 	
+	tree->SetBranchAddress("Generator_weight", &Generator_weight);
 	tree->SetBranchAddress("genWeight", &genWeight);
 	tree->SetBranchAddress("nGenPart", &nGenPart);
 	tree->SetBranchAddress("GenPart_pdgId", &GenPart_pdgId);
@@ -103,23 +110,22 @@ void ZJets(){
 	tree->SetBranchAddress("GenMET_pt", &GenMET_pt);
         tree->SetBranchAddress("GenMET_phi", &GenMET_phi);
 
-	//TH1F* pairPT_mg273 = new TH1F ("pairPT_mg273", "top quark pair PT", 20, 0, 200);
-	//TH1F* PT_mg273 = new TH1F ("PT_mg273", "top quark PT", 20, 0, 400);
 	
-	TH1F* njet = new TH1F ("njet", "No. of jets", 5, 0, 5);
-	TH1F* jetpt = new TH1F ("jetpt", "Pt of all jets", 30, 0, 300);
+	TH1F* njet = new TH1F ("njet", "No. of jets", 10, 0, 10);
+	TH1F* jetpt = new TH1F ("jetpt", "Pt of all jets", 60, 0, 600);
+	//jetpt->Sumw2();
 	TH1F* jeteta = new TH1F ("jeteta", "eta of all jets", 30, -5, 5);
 	TH1F* jetphi = new TH1F ("jetphi", "Phi of all jets", 30, -3, 3);
 
-	TH1F* jet1pt = new TH1F ("jet1pt", "Pt of leading jets", 30, 0, 300);
+	TH1F* jet1pt = new TH1F ("jet1pt", "Pt of leading jets", 60, 0, 600);
 	TH1F* jet1eta = new TH1F ("jet1eta", "eta of leading jets", 30, -5, 5);
         TH1F* jet1phi = new TH1F ("jet1phi", "Phi of leading jets", 30, -3, 3);
 
-	TH1F* jet2pt = new TH1F ("jet2pt", "Pt of sub-leading jets", 30, 0, 300);
+	TH1F* jet2pt = new TH1F ("jet2pt", "Pt of sub-leading jets", 60, 0, 600);
         TH1F* jet2eta = new TH1F ("jet2eta", "eta of sub-leading jets", 30, -5, 5);
         TH1F* jet2phi = new TH1F ("jet2phi", "Phi of sub-leading jets", 30, -3, 3);
 
-	TH1F* jet3pt = new TH1F ("jet3pt", "Pt of 3rd jets", 30, 0, 300);
+	TH1F* jet3pt = new TH1F ("jet3pt", "Pt of 3rd jets", 60, 0, 600);
         TH1F* jet3eta = new TH1F ("jet3eta", "eta of 3rd jets", 30, -5, 5);
         TH1F* jet3phi = new TH1F ("jet3phi", "Phi of 3rd jets", 30, -3, 3);
 	
@@ -127,53 +133,44 @@ void ZJets(){
         TH1F* genparteta = new TH1F ("genparteta", "eta of gen particles", 100, -5, 5);
         TH1F* genpartphi = new TH1F ("genpartphi", "Phi of gen particles", 100, -3, 3);
 	
-	TH1F* genleptonpt = new TH1F ("genleptonpt", "Pt of leptons", 30, 0, 200);
+	TH1F* genleptonpt = new TH1F ("genleptonpt", "Pt of leptons", 20, 0, 200);
         TH1F* genleptoneta = new TH1F ("genleptoneta", "eta of leptons", 30, -5, 5);
         TH1F* genleptonphi = new TH1F ("genleptonphi", "Phi of leptons", 30, -3, 3);
 
-	TH1F* metpt = new TH1F ("metpt", "pt of met", 30, 0, 200);
+	TH1F* metpt = new TH1F ("metpt", "pt of met", 20, 0, 200);
         TH1F* metphi = new TH1F ("metphi", "Phi of met", 30, -3, 3);
 
 	TH1F* zmass = new TH1F ("zmass", "mass of z", 40, 0, 200);
-	TH1F* zpt = new TH1F ("zpt", "pt of z", 30, 0, 300);
+	TH1F* zpt = new TH1F ("zpt", "pt of z", 60, 0, 600);
 	TH1F* zeta = new TH1F ("zeta", "eta of z", 30, -5, 5);
 	TH1F* zphi = new TH1F ("zphi", "phi of z", 30, -3, 3);
+
+	TH1F* genwt_bf = new TH1F ("genwt_bf", "genwt_bf", 2, -1, 1);
+        TH1F* genwt_af = new TH1F ("genwt_af", "genwt_af", 2, -1, 1);
+
+	TH1F* h_sumpt = new TH1F ("sumpt", "sumpt", 100, 0, 1000);
 
 	Long64_t nentries = tree->GetEntries();       
         //cout << "No. of Entries in the root file : " << nentries <<endl; 		      
 	
 	Int_t nevt = 0;
+	//test =0;
 	for (Long64_t jentry=0; jentry<nentries;jentry++) {
-	//for (Long64_t jentry=0; jentry<1949564;jentry++) { // event loop starts
+	//for (Long64_t jentry=0; jentry<20000;jentry++) { // event loop starts
 		tree->GetEntry(jentry);
 		nevt++;
 	cout << "No. of events processed : "<<nevt<<endl;
+	
+	genwt_bf->Fill(genWeight);
 
-/*
-// for all top and anti-top
-		for(int igenpart=0; igenpart<nGenPart; igenpart++) { //gen loop
- 			if( std::abs(GenPart_pdgId[igenpart]) == 6  && GenPart_status[igenpart] > 60 ) {   // check top and antitop quaark
-				PT_mg273->Fill(GenPart_pt[igenpart]);
-                		}
-        
-//for top pair
-		for(int igenpart1=0; igenpart1<nGenPart-1; igenpart1++) {//gen loop
-                        if(((GenPart_pdgId[igenpart1]) == 6 ||  (GenPart_pdgId[igenpart1]) == -6) && (GenPart_status[igenpart1] > 60 )){
-                                for(int igenpart2=igenpart1+1; igenpart2<nGenPart; igenpart2++) {//gen loop
-                                                if(((GenPart_pdgId[igenpart2]) == 6 ||  (GenPart_pdgId[igenpart2]) == -6) && GenPart_status[igenpart2] > 60 {
-                                                        if(((GenPart_pdgId[igenpart1])*(GenPart_pdgId[igenpart2])) < 0){
-                                                                        Float_t px1 = GenPart_pt[igenpart1]*cos(GenPart_phi[igenpart1]);
-                                                                        Float_t py1 = GenPart_pt[igenpart1]*sin(GenPart_phi[igenpart1]);
-                                                                        Float_t px2 = GenPart_pt[igenpart2]*cos(GenPart_phi[igenpart2]);
-                                                                        Float_t py2 = GenPart_pt[igenpart2]*sin(GenPart_phi[igenpart2]);
-                                                                        Float_t pt = sqrt(px1*px2 + py1*py2);
-                                                                        pairPT_mg273->Fill(pt);
-                                                                	}
-                                                        	}
-                                        		}
-                                		}
-                        		}
-*/
+	//if(isnan(genWeight) || isinf(genWeight)){std::cout << "Entry = " << nevt << " genWeight = " << genWeight << std::endl;}
+	if (std::isfinite(genWeight)) {//{std::cout << "Entry = " << nevt << " genWeight = " << genWeight << std::endl;}
+	//cout<<"Event Weight : "<<genWeight<<endl;
+	//continue;
+		
+	//std::cout << "Entry = " << nevt << " genWeight = " << genWeight << std::endl;
+	genwt_af->Fill(genWeight);        
+
 		TLorentzVector el1, el2, el;
 
 		for(int igenpart1=0; igenpart1<nGenDressedLepton; igenpart1++) { // z loop
@@ -189,6 +186,8 @@ void ZJets(){
                                         				//el = (el1+el2);
                                                 			zmass->Fill(el.M(),genWeight);
 									zpt->Fill(el.Pt(),genWeight);
+									//test = (el.Pt(),genWeight);
+									//zpt->Fill(test>0.0 ? test : 0.0);
 									zeta->Fill(el.Eta(),genWeight);
 									zphi->Fill(el.Phi(),genWeight);
                                                 			}	
@@ -198,6 +197,8 @@ void ZJets(){
         				}
 
 		for (int njets=0; njets<nGenJet; njets++){  // jet loop
+			//test = (njets,genWeight);
+			//njet->Fill(test>0 ? test : 0);
 			njet->Fill(njets,genWeight);
 			jetpt->Fill(GenJet_pt[njets],genWeight);
 			jeteta->Fill(GenJet_eta[njets],genWeight);
@@ -245,16 +246,33 @@ void ZJets(){
 
 		metpt->Fill(GenMET_pt,genWeight);
 		metphi->Fill(GenMET_phi,genWeight);
+
+		double sum_pt = 0.0;
+               	for (int _nJet = 0; _nJet < nGenJet; _nJet++) {
+                	const auto pt = GenJet_pt[_nJet];
+                        const auto eta = GenJet_eta[_nJet];
+                        const auto phi = GenJet_phi[_nJet];
+                        sum_pt += pt;
+                        }
+                
+		//h_sumpt->Fill(sum_pt,*genWeight);
+
+		if (!std::isfinite(sum_pt)) {
+			std::cout << "Entry = " << nevt << " sum_pt = " << sum_pt << std::endl;
+			//cout <<"Test 1"<<endl;
+		} else {
+ 			 h_sumpt->Fill(sum_pt);
+			//cout <<"Test 2"<<endl;
+			}
+	}
 }//event loop
 
    	//TFile* of = TFile::Open("dyee012j_5f_NLO_UNLOPS_output_23052021.root", "RECREATE");
    	//TFile* of = TFile::Open("dyee012j_5f_NLO_UNLOPS_output_26052021_v2.root", "RECREATE");
-   	
 	//TFile* of = TFile::Open("dyee012j_5f_NLO_FXFX_output_23052021.root", "RECREATE");
-	TFile* of = TFile::Open("dyee012j_5f_NLO_FXFX_output_26052021_v2.root", "RECREATE");
-
-   	//pairPT_mg273->Write();
-   	//PT_mg273->Write();
+	TFile* of = TFile::Open("dyeej_2NLO3LO_5f_NLO_UNLOPS_py8306_output_30042022.root", "RECREATE");
+	//TFile* of = TFile::Open("dyeej_2NLO3LO_5f_NLO_UNLOPS_output_04012022.root", "RECREATE");
+	//TFile* of = TFile::Open("dyee012j_5f_NLO_FXFX_output_14122021.root", "RECREATE");
 
    	njet->Write();
    	jetpt->Write();
@@ -288,7 +306,12 @@ void ZJets(){
 	zpt->Write();
 	zeta->Write();
 	zphi->Write();
-   	
+
+	genwt_bf->Write();
+        genwt_af->Write();
+   
+	h_sumpt->Write();
+	
 	of->Close();
 
 }

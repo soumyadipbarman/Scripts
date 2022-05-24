@@ -1,5 +1,5 @@
 executable = $(filename)
-output = $Fp(filename)cdr.$(Process).stdout
-error = $Fp(filename)cdr.$(Process).stderr
-log = $Fp(filename)cdr.$(Process).log
+output = $Fp(filename)cdr.$(Cluster).stdout
+error = $Fp(filename)cdr.$(Cluster).stderr
+log = $Fp(filename)cdr.$(Cluster).log
 queue filename matching (run.sh)
